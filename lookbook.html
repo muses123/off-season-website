@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OFF‑SEASON Lookbook</title>
+  <link rel="stylesheet" href="css/lookbook.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar (reuse your existing bar) -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="lookbook.html" class="active">Lookbook</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <h1 class="logo">off-season</h1>
+    <div class="nav-right">
+      <a href="#"> SEARCH </a>
+      <a href="bag.html" class="bag-link">BAG
+      <span class="bag-count" id="bag-count">0</span>
+      </a>
+      <a href="#"> ACCOUNT </a>
+    </div>
+  </nav>
+
+  <!-- SECTION 1 — HERO -->
+  <section class="hero‑lookbook">
+    <img src="bilder/lookbook-modell2.png" alt="Lookbook Hero" class="hero‑img">
+    <div class="hero‑overlay">
+      <h2>OFF‑SEASON LOOKBOOK</h2>
+      <h1>THE QUIET STANDARD.</h1>
+      <p>There’s no noise here — just presence.</p>
+      <hr class="divider">
+    </div>
+  </section>
+
+  <!-- SECTION 2 — STATEMENT BLOCK -->
+  <section class="statement‑block">
+    <p>
+      OFF‑SEASON is not about standing out.<br>
+      It’s about standing firm.<br>
+      Minimal form. Maximum identity.
+    </p>
+  </section>
+
+  <!-- SECTION 3 — GALLERY (The Quiet Standard Series) -->
+  <section class="gallery‑quiet‑standard">
+    <div class="gallery‑left">
+      <img src="path/to/large‑portrait.jpg" alt="" class="gallery‑img large">
+      <div class="caption">The Quiet Standard.<br>Urban calm — muted tone, clean silhouette.</div>
+    </div>
+    <div class="gallery‑right">
+      <img src="path/to/medium1.jpg" alt="" class="gallery‑img medium">
+      <img src="path/to/medium2.jpg" alt="" class="gallery‑img medium">
+    </div>
+  </section>
+
+  <!-- SECTION 4 — ESSENTIALS IN MOTION -->
+  <section class="essentials‑motion">
+    <div class="motion‑text">
+      <h2>ESSENTIALS IN MOTION</h2>
+      <p>Minimal design. Deliberate energy.</p>
+    </div>
+    <div class="motion‑carousel">
+      <img src="path/to/lifestyle1.jpg" alt="" class="motion‑img">
+      <img src="path/to/lifestyle2.jpg" alt="" class="motion‑img">
+      <img src="path/to/lifestyle3.jpg" alt="" class="motion‑img">
+    </div>
+  </section>
+
+  <!-- SECTION 5 — BETWEEN MOMENTS -->
+  <section class="between‑moments">
+    <img src="bilder/lookbook-modell4.png" alt="" class="full‑bleed‑img">
+    <div class="text‑right">
+      <h2>Between Moments.</h2>
+      <p>Where focus meets stillness.<br>Where Off‑Season begins.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — PRODUCT LINE (STUDIO SHOTS) -->
+  <section class="product‑line‑studio">
+    <h2>Studio Essentials — The foundation of the Off‑Season line.</h2>
+    <div class="studio‑grid">
+      <img src="bilder/black-skullcap-off.png" alt="" class="studio‑img">
+      <img src="bilder/grey-skullcap-lips.png" alt="" class="studio‑img">
+      <img src="bilder/white-skullcap-lips.png" alt="" class="studio‑img">
+      <img src="bilder/off-season all-skullcap.png" alt="" class="studio‑img">
+      <img src="bilder/lookbook logo 1.png" alt="" class="studio‑img">
+      <img src="bilder/lookbook logo svart-hvit3.png" alt="" class="studio‑img">
+    </div>
+  </section>
+
+  <!-- SECTION 7 — BRAND CLOSER / QUOTE -->
+  <section class="brand‑closer">
+    <p>“It’s not a pause. It’s precision.”</p>
+    <h2>OFF‑SEASON</h2>
+  </section>
+
+
+
+  <script>
+  // Update bag count on page load/ telle antall varer i bag
+  function updateBagCount() {
+    const cart = JSON.parse(localStorage.getItem('offseason-cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const bagCountElement = document.getElementById('bag-count');
+    
+    if (totalItems > 0) {
+      bagCountElement.textContent = totalItems;
+      bagCountElement.classList.add('show');
+    } else {
+      bagCountElement.classList.remove('show');
+    }
+  }
+  updateBagCount();
+</script>
+
+</body>
+</html>

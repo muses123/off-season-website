@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart — Off-Season</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/bag.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">HOME</a>
+      <a href="shop.html">SHOP</a>
+      <a href="lookbook.html">LOOKBOOK</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </div>
+    <h1 class="logo">off-season</h1>
+    <div class="nav-right">
+      <a href="#">SEARCH</a>
+      <a href="bag.html" class="active">BAG</a>
+      <a href="#">ACCOUNT</a>
+    </div>
+  </nav>
+
+  <!-- Cart Page -->
+  <div class="cart-container">
+    <!-- Header -->
+    <div class="cart-header">
+      <h1 class="cart-title">SHOPPING CART</h1>
+      <a href="shop.html" class="back-link">BACK</a>
+    </div>
+
+    <!-- Cart Items -->
+    <div class="cart-content">
+      <div id="cart-items" class="cart-items">
+        <!-- Items will be dynamically loaded here -->
+      </div>
+
+      <!-- Empty Cart Message -->
+      <div id="empty-cart" class="empty-cart" style="display: none;">
+        <p>Your bag is empty</p>
+        <a href="shop.html" class="shop-link">Continue Shopping</a>
+      </div>
+    </div>
+
+    <!-- Cart Summary (sticky bottom) -->
+    <div class="cart-summary" id="cart-summary" style="display: none;">
+      <div class="summary-row">
+        <span class="summary-label">SUBTOTAL:</span>
+        <span class="summary-value" id="cart-total">0 KR</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn">CHECKOUT</button>
+    </div>
+  </div>
+
+  <!-- Vipps Popup -->
+  <div id="vipps-popup" class="popup-overlay">
+    <div class="popup-content">
+      <span class="close-popup">&times;</span>
+      <h2>Vipps Checkout</h2>
+      <p>Total: <strong id="vipps-total">0 KR</strong></p>
+      <p class="vipps-info">Send to: <strong>Vipps +47 92353254</strong></p>
+      <p class="vipps-instructions">Include your name + items in message.</p>
+      <p class="thanks">Once paid, I'll confirm with you directly 🙌</p>
+    </div>
+  </div>
+
+  <script>
+    // Load cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('offseason-cart')) || [];
+
+    const cartItemsContainer = document.getElementById('cart-items');
+    const emptyCartMessage = document.getElementById('empty-cart');
+    const cartSummary = document.getElementById('cart-summary');
+    const totalDisplay = document.getElementById('cart-total');
+    const vippsTotal = document.getElementById('vipps-total');
+
+    // Function to render cart
+    function renderCart() {
+      cartItemsContainer.innerHTML = '';
+      
+      if (cart.length === 0) {
+        emptyCartMessage.style.display = 'block';
+        cartSummary.style.display = 'none';
+        return;
+      }
+
+      emptyCartMessage.style.display = 'none';
+      cartSummary.style.display = 'block';
+
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        
+        const priceNum = parseInt(item.price.replace(/[^\d]/g, ''));
+        const quantity = item.quantity || 1;
+        const itemTotal = priceNum * quantity;
+        total += itemTotal;
+
+        itemDiv.innerHTML = `
+          <div class="item-image">
+            <img src="${item.image || './bilder/black-skullcap-off.png'}" alt="${item.name}">
+          </div>
+          <div class="item-details">
+            <h3 class="item-name">${item.name}</h3>
+            <p class="item-color">${item.color || 'Black'} / ${item.size || 'ONE SIZE'}</p>
+            <div class="item-quantity">
+              <span class="qty-label">Qty:</span>
+              <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
+              <span class="qty-value">${quantity}</span>
+              <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+            </div>
+          </div>
+          <div class="item-price">
+            <span class="price-amount">${itemTotal.toLocaleString('no-NO')} kr</span>
+            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+          </div>
+        `;
+        
+        cartItemsContainer.appendChild(itemDiv);
+      });
+
+      totalDisplay.textContent = `${total.toLocaleString('no-NO')} KR`;
+      vippsTotal.textContent = `${total.toLocaleString('no-NO')} KR`;
+    }
+
+    // Update quantity
+    window.updateQuantity = function(index, change) {
+      if (cart[index]) {
+        cart[index].quantity = (cart[index].quantity || 1) + change;
+        
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+        }
+        
+        localStorage.setItem('offseason-cart', JSON.stringify(cart));
+        renderCart();
+      }
+    };
+
+    // Remove item
+    window.removeItem = function(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('offseason-cart', JSON.stringify(cart));
+      renderCart();
+    };
+
+    // Checkout button
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+      document.getElementById('vipps-popup').style.display = 'flex';
+    });
+
+    // Close popup
+    document.querySelector('.close-popup').addEventListener('click', () => {
+      document.getElementById('vipps-popup').style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      const popup = document.getElementById('vipps-popup');
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+
+    // Initial render
+    renderCart();
+  </script>
+
+</body>
+</html>
+

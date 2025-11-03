@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Off-Season Skullcap Product</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">HOME</a>
+      <a href="shop.html">SHOP</a>
+      <a href="lookbook.html">LOOKBOOK</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </div>
+    <h1 class="logo">off-season</h1>
+    <div class="nav-right">
+      <a href="#">SEARCH</a>
+      <a href="bag.html" class="bag-link">
+        BAG
+        <span class="bag-count" id="bag-count">0</span>
+      </a>
+      <a href="#">ACCOUNT</a>
+    </div>
+  </nav>
+
+  <!-- Product Container -->
+  <div class="product-container">
+    <!-- Left - Product Images -->
+    <div class="product-images" id="product-images">
+      <!-- Images will be dynamically loaded here -->
+    </div>
+
+    <!-- Right - Product Info -->
+    <div class="product-info">
+      <p class="product-category">ESSENTIALS</p>
+      <h1 class="product-title" id="product-title">Off-Season Black Skullcap</h1>
+      <p class="product-price" id="product-price">299 NOK</p>
+
+      <p class="product-desc" id="product-desc">
+        The Off-Season Black Skullcap is crafted from premium cotton with embroidered detailing. 
+        Features "off-season" text on the front and signature red lips embroidery on the back. 
+        Double-layered construction provides warmth and structure. Flexible, soft-stretch fit. Unisex design.
+      </p>
+
+      <!-- Color Selection -->
+      <div class="product-options">
+        <div class="option-group">
+          <label class="option-label">COLOR</label>
+          <div class="color-selector">
+            <div class="color-option black active" data-color="skullcap-black" title="Black"></div>
+            <div class="color-option white" data-color="skullcap-white" title="White"></div>
+            <div class="color-option grey" data-color="skullcap-grey" title="Charcoal"></div>
+          </div>
+        </div>
+
+        <!-- Size Selection -->
+        <div class="option-group">
+          <label class="option-label">SIZE</label>
+          <select class="size-selector">
+            <option>ONE SIZE</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <button class="add-to-cart" id="add-to-cart">ADD TO BAG</button>
+      <button class="buy-now" id="buy-now">BUY NOW</button>
+
+      <!-- Details Sections -->
+      <div class="details-section">
+        <button class="detail-toggle">
+          DETAILS
+          <span>+</span>
+        </button>
+        <div class="detail-content">
+          <ul>
+            <li>Front: "off-season" embroidery</li>
+            <li>Back: embroidered red lips detail</li>
+            <li>Double-layered construction</li>
+            <li>Flexible, soft-stretch fit</li>
+            <li>Unisex</li>
+            <li>100% Cotton</li>
+          </ul>
+        </div>
+
+        <button class="detail-toggle">
+          SHIPPING POLICY
+          <span>+</span>
+        </button>
+        <div class="detail-content">
+          <ul>
+            <li>Ships within 1-2 business days</li>
+            <li>Free domestic shipping over 1000 NOK</li>
+            <li>International shipping available</li>
+            <li>Tracking provided for all orders</li>
+          </ul>
+        </div>
+
+        <button class="detail-toggle">
+          SHARE
+          <span>+</span>
+        </button>
+        <div class="detail-content">
+          <a href="#" style="color: #111; margin-right: 15px;">Instagram</a>
+          <a href="#" style="color: #111; margin-right: 15px;">Facebook</a>
+          <a href="#" style="color: #111;">X</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vipps Popup -->
+  <div id="vipps-popup" class="popup-overlay">
+    <div class="popup-content">
+      <span class="close-popup">&times;</span>
+      <h2>Payment Info</h2>
+      <p>Send <strong id="vipps-price">299 NOK</strong> to:</p>
+      <p class="vipps-number">Vipps +47 92353254</p>
+      <p>In the message, write:</p>
+      <p><code id="vipps-message">BLACK SKULLCAP + Your Name</code></p>
+      <p class="thanks">Once paid, I'll confirm with you directly 🙌</p>
+    </div>
+  </div>
+
+  <!-- Zoom Overlay -->
+  <div id="zoom-overlay" class="zoom-overlay">
+    <span class="close-zoom">&times;</span>
+    <img src="" alt="Zoomed image" id="zoomed-img">
+  </div>
+
+  <script>
+    // Product Data
+    const productData = {
+      "skullcap-black": {
+        name: "Off-Season Black Skullcap",
+        price: "299 NOK",
+        images: [
+          "./bilder/black-skullcap-off.png",
+          "./bilder/black-skullscap-lips.png",
+          "./bilder/black-skullcap-sidebyside.png"
+        ],
+        desc: "The Off-Season Black Skullcap is crafted from premium cotton with embroidered detailing. Features \"off-season\" text on the front and signature red lips embroidery on the back. A double-layer satin-lined interior adds comfort, warmth, and structure. Designed for a soft, flexible fit that moves with you — understated, unisex, and built for everyday wear."
+      },
+      "skullcap-white": {
+        name: "Off-Season White Skullcap",
+        price: "299 NOK",
+        images: [
+          "./bilder/white-skulcap-off.png",
+          "./bilder/white-skullcap-lips.png"
+        ],
+        desc: "The Off-Season White Skullcap arrives in a crisp white finish with contrast black embroidery. Crafted from premium cotton with a smooth satin-lined interior, it balances warmth and structure in a minimal silhouette. Featuring signature skull and flame detailing, this unisex piece delivers a bold yet refined edge — built for colder days and clean styling.."
+      },
+      "skullcap-grey": {
+        name: "Off-Season Charcoal Skullcap",
+        price: "299 NOK",
+        images: [
+          "./bilder/grey-off.png",
+          "./bilder/grey-skullcap-lips.png"
+        ],
+        desc: "The Off-Season Light Grey Skullcap pairs minimal branding with a versatile, refined look. Crafted from premium cotton, it features signature embroidered details front and back. A double-layered, satin-lined build provides warmth and structure, while the stretch fit ensures everyday comfort. Designed to feel cozy, sharp, and effortlessly unisex"
+      }
+    };
+
+    // Get product ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id") || "skullcap-black";
+    const product = productData[productId];
+
+    // Update bag count on page load
+    function updateBagCount() {
+      const cart = JSON.parse(localStorage.getItem('offseason-cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      const bagCountElement = document.getElementById('bag-count');
+      
+      if (totalItems > 0) {
+        bagCountElement.textContent = totalItems;
+        bagCountElement.classList.add('show');
+      } else {
+        bagCountElement.classList.remove('show');
+      }
+    }
+
+    // Animate bag count
+    function animateBagCount() {
+      const bagCountElement = document.getElementById('bag-count');
+      bagCountElement.classList.add('pulse');
+      setTimeout(() => {
+        bagCountElement.classList.remove('pulse');
+      }, 600);
+    }
+
+    // Initial bag count
+    updateBagCount();
+
+    // Load Product Data
+    if (product) {
+      document.getElementById("product-title").textContent = product.name;
+      document.getElementById("product-price").textContent = product.price;
+      document.getElementById("product-desc").textContent = product.desc;
+      document.getElementById("vipps-price").textContent = product.price;
+      document.getElementById("vipps-message").textContent = `${product.name.toUpperCase()} + Your Name`;
+
+      // Load Images
+      const imageContainer = document.getElementById("product-images");
+      if (imageContainer && product.images) {
+        product.images.forEach(src => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.className = "product-image";
+          img.alt = product.name;
+          imageContainer.appendChild(img);
+        });
+      }
+
+      // Set active color
+      document.querySelectorAll('.color-option').forEach(option => {
+        option.classList.remove('active');
+        if (option.dataset.color === productId) {
+          option.classList.add('active');
+        }
+      });
+    }
+
+    // Color Switcher
+    document.querySelectorAll('.color-option').forEach(option => {
+      option.addEventListener('click', () => {
+        const newProductId = option.dataset.color;
+        window.location.href = `product.html?id=${newProductId}`;
+      });
+    });
+
+    // Image Zoom
+    const zoomOverlay = document.getElementById("zoom-overlay");
+    const zoomedImg = document.getElementById("zoomed-img");
+    
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('product-image')) {
+        zoomedImg.src = e.target.src;
+        zoomOverlay.style.display = "flex";
+      }
+    });
+
+    document.querySelector('.close-zoom').addEventListener('click', () => {
+      zoomOverlay.style.display = "none";
+    });
+
+    zoomOverlay.addEventListener('click', (e) => {
+      if (e.target === zoomOverlay) {
+        zoomOverlay.style.display = "none";
+      }
+    });
+
+    // Add to Cart
+    document.getElementById('add-to-cart').addEventListener('click', () => {
+      const cart = JSON.parse(localStorage.getItem('offseason-cart')) || [];
+      cart.push({
+        name: product.name,
+        price: product.price,
+        image: product.images[0]
+      });
+      localStorage.setItem('offseason-cart', JSON.stringify(cart));
+      
+      // Update and animate bag count
+      updateBagCount();
+      animateBagCount();
+      
+      // Show success message
+      const btn = document.getElementById('add-to-cart');
+      const originalText = btn.textContent;
+      btn.textContent = 'ADDED TO BAG ✓';
+      btn.style.backgroundColor = '#2d7a2d';
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.backgroundColor = '#111';
+      }, 2000);
+    });
+
+    // Buy Now - Vipps Popup
+    document.getElementById('buy-now').addEventListener('click', () => {
+      document.getElementById('vipps-popup').style.display = 'flex';
+    });
+
+    document.querySelector('.close-popup').addEventListener('click', () => {
+      document.getElementById('vipps-popup').style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('vipps-popup')) {
+        document.getElementById('vipps-popup').style.display = 'none';
+      }
+    });
+
+    // Toggle Details
+    document.querySelectorAll('.detail-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const content = toggle.nextElementSibling;
+        const icon = toggle.querySelector('span');
+        
+        content.classList.toggle('active');
+        icon.textContent = content.classList.contains('active') ? '−' : '+';
+      });
+    });
+  </script>
+
+</body>
+</html>

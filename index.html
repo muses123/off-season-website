@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Off-Season FW25</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+   <!-- Navbar (same as homepage) -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="lookbook.html">Lookbook</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <h1 class="logo">off-season</h1>
+    <div class="nav-right">
+      <a href="#"> SEARCH </a>
+      <a href="bag.html" class="bag-link">BAG
+        <span class="bag-count" id="bag-count">0</span>
+      <a href="#"> ACCOUNT </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+   <section class="hero-section">
+  <header class="hero">
+    <img src="./bilder/test2.png" alt="Hero Image" class="hero-img" />
+    <div class="overlay-text">
+      <p class="small-text">NOW LIVE</p>
+      <h2 class="main-heading"> off-season skullcaps</h2>
+      <a href="shop.html" class="hero-button">SHOP NOW</a>
+    </div>
+  </header>
+
+ 
+</section>
+
+  <script>
+  // Update bag count on page load/ telle antall varer i bag
+  function updateBagCount() {
+    const cart = JSON.parse(localStorage.getItem('offseason-cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const bagCountElement = document.getElementById('bag-count');
+    
+    if (totalItems > 0) {
+      bagCountElement.textContent = totalItems;
+      bagCountElement.classList.add('show');
+    } else {
+      bagCountElement.classList.remove('show');
+    }
+  }
+  updateBagCount();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Off-Season</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">HOME</a>
+      <a href="shop.html">SHOP</a>
+      <a href="lookbook.html">LOOKBOOK</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html" class="active">CONTACT</a>
+    </div>
+    <h1 class="logo">off-season</h1>
+    <div class="nav-right">
+      <a href="#">SEARCH</a>
+      <a href="bag.html" class="bag-link">
+        BAG
+        <span class="bag-count" id="bag-count">0</span>
+      </a>
+      <a href="#">ACCOUNT</a>
+    </div>
+  </nav>
+
+  <!-- Contact Container -->
+  <div class="contact-container">
+    
+    <!-- Contact Header -->
+    <div class="contact-header">
+      <h1>GET IN TOUCH</h1>
+      <p>Questions? Collabs? Just want to talk? We're here.</p>
+    </div>
+
+    <!-- Contact Content -->
+    <div class="contact-content">
+      
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <div class="info-block">
+          <h2>EMAIL</h2>
+          <a href="mailto:contact@off-season.no" class="contact-link">
+            contact@off-season.no
+          </a>
+        </div>
+
+        <div class="info-block">
+          <h2>INSTAGRAM</h2>
+          <a href="https://instagram.com/offseason" target="_blank" class="contact-link">
+            @offseason
+          </a>
+        </div>
+
+        <div class="info-block">
+          <h2>LOCATION</h2>
+          <p class="contact-text">Oslo, Norway</p>
+        </div>
+
+        <div class="info-block">
+          <h2>CUSTOMER SUPPORT</h2>
+          <p class="contact-text">Response time: 24-48 hours</p>
+          <p class="contact-text">For orders, shipping, or returns</p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="name">NAME</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">SUBJECT</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">MESSAGE</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">SEND MESSAGE</button>
+        </form>
+
+        <p class="form-note">
+          * We'll get back to you as soon as possible. For urgent inquiries, DM us on Instagram.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Footer Quote -->
+    <div class="contact-footer">
+      <p>Built for the grind. Made for the quiet ones.</p>
+    </div>
+
+  </div>
+
+  <script>
+    // Update bag count on page load
+    function updateBagCount() {
+      const cart = JSON.parse(localStorage.getItem('offseason-cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      const bagCountElement = document.getElementById('bag-count');
+      
+      if (totalItems > 0) {
+        bagCountElement.textContent = totalItems;
+        bagCountElement.classList.add('show');
+      } else {
+        bagCountElement.classList.remove('show');
+      }
+    }
+    updateBagCount();
+
+    // Form submission
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const btn = document.querySelector('.submit-btn');
+      const originalText = btn.textContent;
+      
+      btn.textContent = 'SENDING...';
+      btn.disabled = true;
+      
+      // Simulate form submission (replace with actual email service)
+      setTimeout(() => {
+        btn.textContent = 'MESSAGE SENT ✓';
+        btn.style.backgroundColor = '#2d7a2d';
+        
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.backgroundColor = '#111';
+          btn.disabled = false;
+          document.getElementById('contact-form').reset();
+        }, 3000);
+      }, 1500);
+    });
+  </script>
+
+</body>
+</html>

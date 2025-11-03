@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Off-Season</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">HOME</a>
+      <a href="shop.html">SHOP</a>
+      <a href="lookbook.html">LOOKBOOK</a>
+      <a href="about.html" class="active">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </div>
+    <h1 class="logo">off-season</h1>
+    <div class="nav-right">
+      <a href="#">SEARCH</a>
+      <a href="bag.html" class="bag-link">
+        BAG
+        <span class="bag-count" id="bag-count">0</span>
+      </a>
+      <a href="#">ACCOUNT</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Image -->
+  <section class="about-hero">
+    <div class="hero-image-container">
+      <img src="./bilder/pic 1..jpg" alt="Off-Season Brand" class="hero-image">
+      <div class="hero-overlay">
+        <h1>off-season</h1>
+        <p>Not everything needs to be loud.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Text Content -->
+  <section class="about-text">
+    <div class="text-block">
+      <h2>About the Brand</h2>
+      <p>
+        Off-Season is built around timing.<br>
+        The space between the noise.<br>
+        Where most people slow down, we stay focused.
+      </p>
+    </div>
+
+    <div class="text-block">
+      <p>
+        This brand isn't about chasing trends or flooding drops.<br>
+        It's about pieces that hold up — clean design, small details, and the kind of energy that doesn't beg for attention.
+      </p>
+    </div>
+
+    <div class="text-block">
+      <p>
+        Every item we make is meant to be worn without overthinking it.<br>
+        Made for people who stay active when no one's watching.<br>
+        Who keep building, quietly.
+      </p>
+    </div>
+  </section>
+
+  <!-- Image Break - Lifestyle Shot -->
+  <section class="about-image-break">
+    <img src="./bilder/test2.png" alt="Off-Season Lifestyle">
+  </section>
+
+  <!-- The Name Section -->
+  <section class="about-name">
+    <div class="name-content">
+      <h2>The Name</h2>
+      <p>
+        Off-Season isn't a pause.<br>
+        It's preparation.
+      </p>
+      <p>
+        It's the stretch of time when things grow, out of sight.<br>
+        The name is a reminder: don't wait for permission to level up.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer Quote -->
+  <section class="about-footer-quote">
+    <p><em>Low-key on purpose. Off-Season for a reason.</em></p>
+  </section>
+
+  <script>
+    // Update bag count on page load
+    function updateBagCount() {
+      const cart = JSON.parse(localStorage.getItem('offseason-cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      const bagCountElement = document.getElementById('bag-count');
+      
+      if (totalItems > 0) {
+        bagCountElement.textContent = totalItems;
+        bagCountElement.classList.add('show');
+      } else {
+        bagCountElement.classList.remove('show');
+      }
+    }
+    updateBagCount();
+  </script>
+
+</body>
+</html>

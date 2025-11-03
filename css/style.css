@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Inter', sans-serif;
+ background-color: #fff;  
+  color: #fff;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(255, 255, 255, 0); /* fully transparent */
+  backdrop-filter: blur(0px); /* optional */
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 1000;
+}
+/* Navbar hover */
+.navbar:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-left a,
+.nav-right a {
+  color: #222;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-left a:hover,
+.nav-right a:hover {
+  color: rgb(189, 189, 189);
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  color: #111;
+  letter-spacing: 2px;
+  font-weight: 600;
+  z-index: 999;  /* Ensure logo is above other elements */
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  object-position: center 20%;
+  z-index: -1;
+}
+
+
+.overlay-text {
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+}
+
+.overlay-text .small-text {
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.overlay-text .main-heading {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: #ddd;
+}
+
+
+/*  bag style telleer*/
+.bag-link {
+  position: relative;
+}
+
+.bag-count {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background-color: #111;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.bag-count.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bag-count.pulse {
+  animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}

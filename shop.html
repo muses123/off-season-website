@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shop – Off-Season</title>
+  <link rel="stylesheet" href="css/shop.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar (same as homepage) -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="lookbook.html">Lookbook</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <h1 class="logo">off-season</h1>
+    <div class="nav-right">
+      <a href="#"> SEARCH </a>
+      <a href="bag.html" class="bag-link"> BAG
+    <span class="bag-count" id="bag-count">0</span>
+    </a>
+      <a href="#"> ACCOUNT </a>
+    </div>
+  </nav>
+
+  <!-- Shop Content -->
+  <main class="shop-page">
+    <h2 class="shop-heading">Shop Collection</h2>
+    <section class="product-grid">
+
+    <div class="product-card" onclick="window.location.href='product.html?id=skullcap-black'">
+        <img src="./bilder/black-skullcap-off.png" alt="Skullcap 1 Back">
+        <h3>Off-Season Black-Skullcap</h3>
+        <p class="price">299 NOK</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+
+    <div class="product-card" onclick="window.location.href='product.html?id=skullcap-white'">
+        <img src="./bilder/white-skulcap-off.png" alt="white skullcaps">
+        <h3>Off-Season white-Skullcap</h3>
+        <p class="price">299 NOK</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+
+    <div class="product-card" onclick="window.location.href='product.html?id=skullcap-grey'">
+        <img src="./bilder/grey-off.png" alt="grey skullcaps">
+        <h3>Off-Season grey-Skullcap</h3>
+        <p class="price">299 NOK</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+     
+
+      <!-- Add more products as needed -->
+    </section>
+  </main>
+
+<!-- Off-Season Offer Popup -->
+<div id="offer-popup" class="offer-popup-overlay">
+  <div class="offer-popup-content">
+    <span class="close-offer">&times;</span>
+    <h2>🕯️ Off-Season Offer</h2>
+    <p class="tagline">Layer up or lose out.</p>
+    <ul class="offer-list">
+      <li><strong>2 for 499 NOK</strong> — Save 98 NOK</li>
+      <li><strong>3 for 700 NOK</strong> — Save 197 NOK</li>
+    </ul>
+    <p class="fine-print">Limited drop. No restocks.</p>
+  </div>
+</div>
+
+<script>
+// Show "Off-Season Offer" popup after delay
+setTimeout(() => {
+  document.getElementById("offer-popup").style.display = "flex";
+}, 1500); // 1,5 seconds
+
+// Close popup
+document.querySelector(".close-offer").addEventListener("click", () => {
+  document.getElementById("offer-popup").style.display = "none";
+});
+
+
+
+  // Update bag count on page load /teller hvor mange varer i handlekurv
+  // 
+  function updateBagCount() {
+    const cart = JSON.parse(localStorage.getItem('offseason-cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const bagCountElement = document.getElementById('bag-count');
+    
+    if (totalItems > 0) {
+      bagCountElement.textContent = totalItems;
+      bagCountElement.classList.add('show');
+    } else {
+      bagCountElement.classList.remove('show');
+    }
+  }
+  updateBagCount();
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
